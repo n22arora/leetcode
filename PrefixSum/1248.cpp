@@ -1,3 +1,28 @@
+// CLEANER 
+
+class Solution {
+public:
+    int numberOfSubarrays(vector<int>& nums, int k) {
+        int result = 0, sum = 0;
+        unordered_map<int, int> seen;
+
+        for (int i = 0 ; i < nums.size() ; i++) {
+            sum += (nums[i] % 2 == 0) ? 0 : 1;
+            
+            if (sum == k) result++;
+
+            if (seen.contains(sum - k)) {
+                result += seen[sum - k];
+            }
+
+            seen[sum]++;
+        }
+
+        return result;
+    }
+};
+
+
 // 1248. Count Number of Nice Subarrays
 // Variant of subarray sum equals K - replace all even with 0 and odd with 1 
 
